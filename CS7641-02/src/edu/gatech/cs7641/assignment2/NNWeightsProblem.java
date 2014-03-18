@@ -67,7 +67,7 @@ public class NNWeightsProblem implements LocalSpace {
 	}
 
 	@Override
-	public Location getRandomLocation() {
+	public Location getRandomLocation(Random random) {
 		double[] weights = net.getWeights();
 		for (int i = 0; i < weights.length; i++) {
 			weights[i] = (random.nextBoolean() ? 1 : -1) * random.nextDouble()
@@ -104,7 +104,7 @@ public class NNWeightsProblem implements LocalSpace {
 	}
 
 	@Override
-	public Location[] neighborhoodOf(Location currentLocation) {
+	public Location[] neighborhoodOf(Location currentLocation, Random random) {
 		double[] weights = ((NNWeights) currentLocation).getWeights();
 		ArrayList<NNWeights> neighbors = new ArrayList<NNWeights>();
 		for (int i = 0; i < net.getWeights().length; i++) {
@@ -120,9 +120,9 @@ public class NNWeightsProblem implements LocalSpace {
 		return neighbors.toArray(new NNWeights[neighbors.size()]);
 	}
 
-	private NNWeights randomNeighborOf(NNWeights weights) {
+	private NNWeights randomNeighborOf(NNWeights weights,Random random) {
 		double[] newWeights = weights.getWeights();
-		double[] delta = ((NNWeights) getRandomLocation()).getWeights();
+		double[] delta = ((NNWeights) getRandomLocation(random)).getWeights();
 		for (int i = 0; i < newWeights.length; i++)
 			newWeights[i] += delta[i];
 		return new NNWeights(newWeights);
