@@ -5,7 +5,7 @@ import java.util.Random;
 import opt.RandomizedHillClimbing;
 import edu.gatech.cs7641.assignment2.util.Timer;
 
-public class TrainNNWeights {
+public class TrainNNWeightsWithRHC {
 
 	private static final int RESTARTS = 100;
 	private static final long SEED = 1L;
