@@ -7,7 +7,22 @@ import edu.gatech.cs7641.assignment2.model.Location;
 
 public class RandomizedHillClimbing {
 
-	public Location search(LocalSpace localSpace, double epsilon,
+	public Location climbFrom(Location currentLocation, LocalSpace localSpace, double epsilon, Random random) {
+		Location nextLocation;
+		double delta = Double.MAX_VALUE;
+		while (delta > epsilon) {
+			double current = localSpace.valueOf(currentLocation);
+			nextLocation = stepUp(localSpace, currentLocation, random);
+			if (nextLocation == null)
+				return currentLocation;
+			double next = localSpace.valueOf(nextLocation);
+			delta = Math.abs(current - next);
+			currentLocation = nextLocation;
+		}
+		return currentLocation;
+	}
+	
+	public Location randomSearch(LocalSpace localSpace, double epsilon,
 			int maxRestarts) {
 		Random random = new Random(1L);
 		double fitness = Double.MAX_VALUE;
@@ -28,19 +43,7 @@ public class RandomizedHillClimbing {
 	public Location climbSomeHill(LocalSpace localSpace, double epsilon,
 			Random random) {
 		Location currentLocation = localSpace.getRandomLocation(random);
-		Location nextLocation;
-		double delta = Double.MAX_VALUE;
-		while (delta > epsilon) {
-			double current = localSpace.valueOf(currentLocation);
-			nextLocation = stepUp(localSpace, currentLocation, random);
-			if (nextLocation == null)
-				return currentLocation;
-			double next = localSpace.valueOf(nextLocation);
-			delta = Math.abs(current - next);
-			// System.out.println(delta + " # " + current + " -> " + next);
-			currentLocation = nextLocation;
-		}
-		return currentLocation;
+		return climbFrom(currentLocation,localSpace,epsilon,random);
 	}
 
 	private Location stepUp(LocalSpace localSpace, Location location,

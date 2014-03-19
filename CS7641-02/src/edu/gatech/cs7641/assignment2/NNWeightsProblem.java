@@ -5,12 +5,16 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import util.linalg.DenseVector;
 import util.linalg.Vector;
 import edu.gatech.cs7641.assignment2.model.LocalSpace;
 import edu.gatech.cs7641.assignment2.model.Location;
+import func.nn.Layer;
+import func.nn.Link;
+import func.nn.Neuron;
 import func.nn.feedfwd.FeedForwardNetwork;
 import func.nn.feedfwd.FeedForwardNeuralNetworkFactory;
 
@@ -66,6 +70,42 @@ public class NNWeightsProblem implements LocalSpace {
 
 	}
 
+	public void printNetwork(NNWeightsLocation weights) {
+		net.setWeights(weights.getWeights());
+		double[] v = {0,127,255};
+		net.setInputValues(new DenseVector(v));
+		net.run();
+		
+		Vector activations;
+		
+		for (int h=0; h<net.getHiddenLayerCount(); h++) {
+			Layer hidden = net.getHiddenLayer(h);
+			activations = hidden.getActivations();
+			System.out.println("Hidden Layer #"+h+" Activation(s)");
+			System.out.println(activations.toString());
+			System.out.println("Hidden Layer #"+h+" Link(s)");
+			for (Object item: hidden.getLinks()) {
+				Link link = (Link) item;
+				System.out.printf("%03f * %s -> %s\n",link.getWeight(),link.getInNode().toString(),link.getOutNode().toString());
+			}
+			System.out.println();
+			System.out.println();
+		}
+		
+
+		Layer output = net.getOutputLayer();
+		activations = output.getActivations();
+		System.out.println("Output Layer Activation(s)");
+		System.out.println(activations.toString());
+		System.out.println("Output Layer Link(s)");
+		for (Object item: output.getLinks()) {
+			Link link = (Link) item;
+			System.out.printf("%03f * %s -> %s\n",link.getWeight(),link.getInNode().toString(),link.getOutNode().toString());
+		}
+		System.out.println();
+		System.out.println();
+	}
+
 	@Override
 	public Location getRandomLocation(Random random) {
 		double[] weights = net.getWeights();
@@ -73,13 +113,13 @@ public class NNWeightsProblem implements LocalSpace {
 			weights[i] = (random.nextBoolean() ? 1 : -1) * random.nextDouble()
 					* INIT_SCALE;
 		}
-		return new NNWeights(weights);
+		return new NNWeightsLocation(weights);
 	}
 
 	@Override
 	public double valueOf(Location start) {
 		if(start==null) throw new RuntimeException("Value of empty set is undefined");
-		NNWeights weights = (NNWeights) start;
+		NNWeightsLocation weights = (NNWeightsLocation) start;
 		net.setWeights(weights.getWeights());
 		double fitness = 0;
 		Vector output;
@@ -105,33 +145,34 @@ public class NNWeightsProblem implements LocalSpace {
 
 	@Override
 	public Location[] neighborhoodOf(Location currentLocation, Random random) {
-		double[] weights = ((NNWeights) currentLocation).getWeights();
-		ArrayList<NNWeights> neighbors = new ArrayList<NNWeights>();
+		double[] weights = ((NNWeightsLocation) currentLocation).getWeights();
+		ArrayList<NNWeightsLocation> neighbors = new ArrayList<NNWeightsLocation>();
 		for (int i = 0; i < net.getWeights().length; i++) {
 			for (int j = 0; j < 2; j++) {
 				double[] newWeights = new double[weights.length];
 				System.arraycopy(weights, 0, newWeights, 0, weights.length);
 				newWeights[i]+=(j==0?-1:1)*STEP_SCALE;
-				neighbors.add(new NNWeights(newWeights));
+				neighbors.add(new NNWeightsLocation(newWeights));
 				//neighbors.add(randomNeighborOf((NNWeights) currentLocation));
 			}
 		}
 		//System.out.println("Neighbors: "+neighbors.size());
-		return neighbors.toArray(new NNWeights[neighbors.size()]);
+		return neighbors.toArray(new NNWeightsLocation[neighbors.size()]);
 	}
 
-	private NNWeights randomNeighborOf(NNWeights weights,Random random) {
+	@SuppressWarnings("unused")
+	private NNWeightsLocation randomNeighborOf(NNWeightsLocation weights,Random random) {
 		double[] newWeights = weights.getWeights();
-		double[] delta = ((NNWeights) getRandomLocation(random)).getWeights();
+		double[] delta = ((NNWeightsLocation) getRandomLocation(random)).getWeights();
 		for (int i = 0; i < newWeights.length; i++)
 			newWeights[i] += delta[i];
-		return new NNWeights(newWeights);
+		return new NNWeightsLocation(newWeights);
 	}
 
 	@Override
 	public double trainingAccuracyOf(Location optimum) {
 		if(optimum==null) throw new RuntimeException("Value of empty set is undefined");
-		NNWeights weights = (NNWeights) optimum;
+		NNWeightsLocation weights = (NNWeightsLocation) optimum;
 		net.setWeights(weights.getWeights());
 		double correct = 0;
 		DenseVector input;
@@ -152,7 +193,7 @@ public class NNWeightsProblem implements LocalSpace {
 	@Override
 	public double fullAccuracyOf(Location optimum) {
 		if(optimum==null) throw new RuntimeException("Value of empty set is undefined");
-		NNWeights weights = (NNWeights) optimum;
+		NNWeightsLocation weights = (NNWeightsLocation) optimum;
 		net.setWeights(weights.getWeights());
 		double correct = 0;
 		DenseVector input;
