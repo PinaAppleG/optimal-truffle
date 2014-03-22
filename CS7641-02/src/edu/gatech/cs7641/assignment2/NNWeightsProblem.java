@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 import util.linalg.DenseVector;
@@ -14,7 +13,6 @@ import edu.gatech.cs7641.assignment2.model.LocalSpace;
 import edu.gatech.cs7641.assignment2.model.Location;
 import func.nn.Layer;
 import func.nn.Link;
-import func.nn.Neuron;
 import func.nn.feedfwd.FeedForwardNetwork;
 import func.nn.feedfwd.FeedForwardNeuralNetworkFactory;
 

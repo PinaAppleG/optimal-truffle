@@ -1,7 +1,6 @@
 package edu.gatech.cs7641.assignment2.algorithms;
 
 import java.util.Random;
-import java.util.Vector;
 
 import edu.gatech.cs7641.assignment2.model.LocalSpace;
 import edu.gatech.cs7641.assignment2.model.Location;

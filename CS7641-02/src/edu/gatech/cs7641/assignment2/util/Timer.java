@@ -2,6 +2,7 @@ package edu.gatech.cs7641.assignment2.util;
 
 public class Timer {
 
+	@SuppressWarnings("unused")
 	private static final int DAY_IN_MILLIS = 86400000;
 	private static final long HOUR_IN_MILLIS = 3600000;
 	private static final long MINUTE_IN_MILLIS = 60000;

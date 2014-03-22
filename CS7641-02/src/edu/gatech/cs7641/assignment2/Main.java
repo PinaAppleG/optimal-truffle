@@ -3,7 +3,6 @@ package edu.gatech.cs7641.assignment2;
 import edu.gatech.cs7641.assignment2.algorithms.GeneticAlgorithm;
 import edu.gatech.cs7641.assignment2.algorithms.RandomizedHillClimbing;
 import edu.gatech.cs7641.assignment2.algorithms.SimulatedAnnealing;
-import edu.gatech.cs7641.assignment2.model.LocalSpace;
 import edu.gatech.cs7641.assignment2.model.Location;
 
 
