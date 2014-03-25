@@ -11,7 +11,7 @@ public class TrainNNWeightsWithGA {
 
 	private static final int RESTARTS = 100;
 	private static final long SEED = 1L;
-	private static final int MAX_GENERATIONS = 300;
+	private static final int MAX_GENERATIONS = 1000;
 	
 	private static NNWeightsValidationEvaluationFunction validator;
 

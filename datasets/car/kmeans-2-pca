@@ -1,0 +1,99 @@
+=== Run information ===
+
+Scheme:       weka.clusterers.SimpleKMeans -V -N 2 -A "weka.core.EuclideanDistance -R first-last" -I 500 -num-slots 1 -S 10
+Relation:     AT: car-weka.filters.unsupervised.attribute.ReplaceMissingValues-weka.filters.unsupervised.attribute.NominalToBinary-Rfirst-last-weka.filters.unsupervised.attribute.Remove-R22-weka.filters.unsupervised.attribute.Standardize_principal components
+Instances:    1728
+Attributes:   16
+              0.552persons=4-0.474persons=2+0.454lug_boot=med-0.346lug_boot=big-0.252safety=low...
+              0.622persons=more-0.579persons=2+0.394lug_boot=small-0.321lug_boot=med+0.078safety=low...
+              0.537lug_boot=med-0.536persons=4+0.503persons=more-0.383lug_boot=small-0.153lug_boot=big...
+              0.816safety=high-0.408safety=low-0.408safety=med0    doors=5more0    doors=2...
+              -0.505safety=low+0.505safety=med+0.452lug_boot=small-0.351lug_boot=big+0.28 persons=2...
+              -0.629lug_boot=big-0.418safety=med+0.418safety=low+0.385lug_boot=small+0.243lug_boot=med...
+              -0.63maint=med+0.496maint=vhigh-0.448buying=low+0.307buying=med-0.14doors=3...
+              -0.6buying=med+0.531buying=low+0.389maint=vhigh-0.378maint=med-0.146maint=low...
+              0.63 doors=3+0.543buying=vhigh-0.356doors=4-0.247buying=low-0.225doors=2...
+              0.707doors=2-0.481doors=4-0.391doors=5more+0.207buying=high-0.171buying=vhigh...
+              0.718maint=high-0.395maint=low+0.349buying=vhigh-0.341maint=vhigh-0.164buying=low...
+              -0.569maint=low-0.549buying=high+0.378buying=med+0.336maint=vhigh+0.239buying=low...
+              -0.544buying=high+0.4  buying=vhigh+0.396doors=2+0.391maint=low-0.336doors=3...
+              0.408maint=high-0.373maint=med-0.348buying=vhigh+0.337buying=med-0.325maint=vhigh...
+              -0.764doors=5more+0.592doors=4+0.244doors=3-0.072doors=2+0.012maint=low...
+Ignored:
+              class
+Test mode:    evaluate on training data
+
+
+=== Clustering model (full training set) ===
+
+
+kMeans
+======
+
+Number of iterations: 3
+Within cluster sum of squared errors: 1743.0361852196947
+Missing values globally replaced with mean/mode
+
+Cluster centroids:
+                                                                                                           Cluster#
+Attribute                                                                                      Full Data          0          1
+                                                                                                  (1728)     (1152)      (576)
+==============================================================================================================================
+0.552persons=4-0.474persons=2+0.454lug_boot=med-0.346lug_boot=big-0.252safety=low...                   0          0          0
+                                                                                               +/-1.2247  +/-1.2633  +/-1.1448
+
+0.622persons=more-0.579persons=2+0.394lug_boot=small-0.321lug_boot=med+0.078safety=low...              0          0          0
+                                                                                               +/-1.2247  +/-1.2287  +/-1.2179
+
+0.537lug_boot=med-0.536persons=4+0.503persons=more-0.383lug_boot=small-0.153lug_boot=big...            0          0          0
+                                                                                               +/-1.2247  +/-1.2253  +/-1.2247
+
+0.816safety=high-0.408safety=low-0.408safety=med0    doors=5more0    doors=2...                        0    -0.8658     1.7315
+                                                                                               +/-1.2247       +/-0       +/-0
+
+-0.505safety=low+0.505safety=med+0.452lug_boot=small-0.351lug_boot=big+0.28 persons=2...               0          0          0
+                                                                                               +/-1.2247  +/-1.3724  +/-0.8573
+
+-0.629lug_boot=big-0.418safety=med+0.418safety=low+0.385lug_boot=small+0.243lug_boot=med...            0          0          0
+                                                                                               +/-1.2247  +/-1.3274   +/-0.989
+
+-0.63maint=med+0.496maint=vhigh-0.448buying=low+0.307buying=med-0.14doors=3...                         0          0          0
+                                                                                               +/-1.1547  +/-1.1549  +/-1.1554
+
+-0.6buying=med+0.531buying=low+0.389maint=vhigh-0.378maint=med-0.146maint=low...                       0          0          0
+                                                                                               +/-1.1547  +/-1.1549  +/-1.1554
+
+0.63 doors=3+0.543buying=vhigh-0.356doors=4-0.247buying=low-0.225doors=2...                            0          0          0
+                                                                                               +/-1.1547  +/-1.1549  +/-1.1554
+
+0.707doors=2-0.481doors=4-0.391doors=5more+0.207buying=high-0.171buying=vhigh...                       0          0          0
+                                                                                               +/-1.1547  +/-1.1549  +/-1.1554
+
+0.718maint=high-0.395maint=low+0.349buying=vhigh-0.341maint=vhigh-0.164buying=low...                   0          0          0
+                                                                                               +/-1.1547  +/-1.1549  +/-1.1554
+
+-0.569maint=low-0.549buying=high+0.378buying=med+0.336maint=vhigh+0.239buying=low...                   0          0          0
+                                                                                               +/-1.1547  +/-1.1549  +/-1.1554
+
+-0.544buying=high+0.4  buying=vhigh+0.396doors=2+0.391maint=low-0.336doors=3...                        0          0          0
+                                                                                               +/-1.1547  +/-1.1549  +/-1.1554
+
+0.408maint=high-0.373maint=med-0.348buying=vhigh+0.337buying=med-0.325maint=vhigh...                   0          0          0
+                                                                                               +/-1.1547  +/-1.1549  +/-1.1554
+
+-0.764doors=5more+0.592doors=4+0.244doors=3-0.072doors=2+0.012maint=low...                             0          0          0
+                                                                                               +/-1.1547  +/-1.1549  +/-1.1554
+
+
+
+
+
+Time taken to build model (full training data) : 0.03 seconds
+
+=== Model and evaluation on training set ===
+
+Clustered Instances
+
+0      1152 ( 67%)
+1       576 ( 33%)
+
