@@ -2,21 +2,24 @@ package edu.gatech.cs7641.assignment2.part1;
 
 import java.util.Random;
 
+import opt.EvaluationFunction;
 import opt.HillClimbingProblem;
+import opt.ga.GeneticAlgorithmProblem;
 import shared.Instance;
+import util.linalg.Vector;
 import func.nn.feedfwd.FeedForwardNetwork;
 import func.nn.feedfwd.FeedForwardNeuralNetworkFactory;
 
-public class NNWeightsHillClimbingProblem implements HillClimbingProblem {
+public class NNWeightsProblem implements HillClimbingProblem, GeneticAlgorithmProblem {
 
 	private static final double INIT_SCALE = 0.1d;
 	private static final double STEP_SCALE = 0.05d;
 	private Random random;
 	private int[] nodeCounts = { 3, 2, 1 };
 	private FeedForwardNetwork net;
-	private NNWeightsTrainingEvaluationFunction trainer;
+	private EvaluationFunction trainer;
 
-	public NNWeightsHillClimbingProblem(Random random) {
+	public NNWeightsProblem(Random random) {
 		this.random = random==null?new Random():random;
 		this.trainer = new NNWeightsTrainingEvaluationFunction(random);
 		FeedForwardNeuralNetworkFactory factory = new FeedForwardNeuralNetworkFactory();
@@ -46,6 +49,18 @@ public class NNWeightsHillClimbingProblem implements HillClimbingProblem {
 		neighbor.getData().set(i,
 				neighbor.getData().get(i) + (sign ? STEP_SCALE : -STEP_SCALE));
 		return neighbor;
+	}
+
+	@Override
+	public Instance mate(Instance a, Instance b) {
+		Vector geneSequence = a.getData().plus(b.getData());
+		geneSequence.timesEquals(0.5);
+		return new Instance(geneSequence);
+	}
+
+	@Override
+	public void mutate(Instance d) {
+		d.getData().plusEquals(this.random().getData());
 	}
 
 }

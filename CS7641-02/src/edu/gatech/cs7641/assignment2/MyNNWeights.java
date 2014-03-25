@@ -2,24 +2,24 @@ package edu.gatech.cs7641.assignment2;
 
 import edu.gatech.cs7641.assignment2.model.Location;
 
-public class NNWeightsLocation implements Location {
+public class MyNNWeights implements Location {
 
 	private double[] weights;
 	
-	private NNWeightsLocation add(NNWeightsLocation a,NNWeightsLocation b) {
+	private MyNNWeights add(MyNNWeights a,MyNNWeights b) {
 		double[] weightsA = a.getWeights();
 		double[] weightsB = b.getWeights();
 		double[] sum = new double[weightsA.length];
 		for (int i = 0; i < weightsA.length; i++)
 			sum[i] =weightsA[i]+weightsB[i];
-		return new NNWeightsLocation(sum);
+		return new MyNNWeights(sum);
 	}
 
 	public double[] getWeights() {
 		return weights;
 	}
 
-	public NNWeightsLocation(double[] weights) {
+	public MyNNWeights(double[] weights) {
 		this.weights=weights;
 	}
 
@@ -38,7 +38,7 @@ public class NNWeightsLocation implements Location {
 
 	@Override
 	public Location mateWith(Location location) {
-		return add(this, (NNWeightsLocation)location);
+		return add(this, (MyNNWeights)location);
 	}
 
 }

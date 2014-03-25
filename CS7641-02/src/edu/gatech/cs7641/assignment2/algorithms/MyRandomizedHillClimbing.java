@@ -5,7 +5,7 @@ import java.util.Random;
 import edu.gatech.cs7641.assignment2.model.LocalSpace;
 import edu.gatech.cs7641.assignment2.model.Location;
 
-public class RandomizedHillClimbing {
+public class MyRandomizedHillClimbing {
 
 	public Location climbFrom(Location currentLocation, LocalSpace localSpace, double epsilon, Random random) {
 		Location nextLocation;

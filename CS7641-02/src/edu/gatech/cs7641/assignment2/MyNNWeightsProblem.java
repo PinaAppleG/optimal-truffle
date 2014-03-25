@@ -16,7 +16,7 @@ import func.nn.Link;
 import func.nn.feedfwd.FeedForwardNetwork;
 import func.nn.feedfwd.FeedForwardNeuralNetworkFactory;
 
-public class NNWeightsProblem implements LocalSpace {
+public class MyNNWeightsProblem implements LocalSpace {
 
 	private int size=0;
 	private static final int SIZELIMIT = 1000;
@@ -29,7 +29,7 @@ public class NNWeightsProblem implements LocalSpace {
 	double[][] test;
 	Random random;
 
-	public NNWeightsProblem() {
+	public MyNNWeightsProblem() {
 		random = new Random(0L);
 		factory = new FeedForwardNeuralNetworkFactory();
 		net = factory.createClassificationNetwork(nodeCounts);
@@ -68,7 +68,7 @@ public class NNWeightsProblem implements LocalSpace {
 
 	}
 
-	public void printNetwork(NNWeightsLocation weights) {
+	public void printNetwork(MyNNWeights weights) {
 		net.setWeights(weights.getWeights());
 		double[] v = {0,127,255};
 		net.setInputValues(new DenseVector(v));
@@ -111,13 +111,13 @@ public class NNWeightsProblem implements LocalSpace {
 			weights[i] = (random.nextBoolean() ? 1 : -1) * random.nextDouble()
 					* INIT_SCALE;
 		}
-		return new NNWeightsLocation(weights);
+		return new MyNNWeights(weights);
 	}
 
 	@Override
 	public double valueOf(Location start) {
 		if(start==null) throw new RuntimeException("Value of empty set is undefined");
-		NNWeightsLocation weights = (NNWeightsLocation) start;
+		MyNNWeights weights = (MyNNWeights) start;
 		net.setWeights(weights.getWeights());
 		double fitness = 0;
 		Vector output;
@@ -143,34 +143,34 @@ public class NNWeightsProblem implements LocalSpace {
 
 	@Override
 	public Location[] neighborhoodOf(Location currentLocation, Random random) {
-		double[] weights = ((NNWeightsLocation) currentLocation).getWeights();
-		ArrayList<NNWeightsLocation> neighbors = new ArrayList<NNWeightsLocation>();
+		double[] weights = ((MyNNWeights) currentLocation).getWeights();
+		ArrayList<MyNNWeights> neighbors = new ArrayList<MyNNWeights>();
 		for (int i = 0; i < net.getWeights().length; i++) {
 			for (int j = 0; j < 2; j++) {
 				double[] newWeights = new double[weights.length];
 				System.arraycopy(weights, 0, newWeights, 0, weights.length);
 				newWeights[i]+=(j==0?-1:1)*STEP_SCALE;
-				neighbors.add(new NNWeightsLocation(newWeights));
+				neighbors.add(new MyNNWeights(newWeights));
 				//neighbors.add(randomNeighborOf((NNWeights) currentLocation));
 			}
 		}
 		//System.out.println("Neighbors: "+neighbors.size());
-		return neighbors.toArray(new NNWeightsLocation[neighbors.size()]);
+		return neighbors.toArray(new MyNNWeights[neighbors.size()]);
 	}
 
 	@SuppressWarnings("unused")
-	private NNWeightsLocation randomNeighborOf(NNWeightsLocation weights,Random random) {
+	private MyNNWeights randomNeighborOf(MyNNWeights weights,Random random) {
 		double[] newWeights = weights.getWeights();
-		double[] delta = ((NNWeightsLocation) getRandomLocation(random)).getWeights();
+		double[] delta = ((MyNNWeights) getRandomLocation(random)).getWeights();
 		for (int i = 0; i < newWeights.length; i++)
 			newWeights[i] += delta[i];
-		return new NNWeightsLocation(newWeights);
+		return new MyNNWeights(newWeights);
 	}
 
 	@Override
 	public double trainingAccuracyOf(Location optimum) {
 		if(optimum==null) throw new RuntimeException("Value of empty set is undefined");
-		NNWeightsLocation weights = (NNWeightsLocation) optimum;
+		MyNNWeights weights = (MyNNWeights) optimum;
 		net.setWeights(weights.getWeights());
 		double correct = 0;
 		DenseVector input;
@@ -191,7 +191,7 @@ public class NNWeightsProblem implements LocalSpace {
 	@Override
 	public double fullAccuracyOf(Location optimum) {
 		if(optimum==null) throw new RuntimeException("Value of empty set is undefined");
-		NNWeightsLocation weights = (NNWeightsLocation) optimum;
+		MyNNWeights weights = (MyNNWeights) optimum;
 		net.setWeights(weights.getWeights());
 		double correct = 0;
 		DenseVector input;

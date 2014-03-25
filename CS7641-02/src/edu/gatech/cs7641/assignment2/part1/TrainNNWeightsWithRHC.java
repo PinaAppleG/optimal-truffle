@@ -8,39 +8,40 @@ import edu.gatech.cs7641.assignment2.util.Timer;
 
 public class TrainNNWeightsWithRHC {
 
+	private static final int NEIGHBORHOOD_SIZE = 1000;
 	private static final int RESTARTS = 100;
 	private static final long SEED = 1L;
-	private static final int NEIGHBORHOOD_SIZE = 1000;
 
 	public static void main(String[] args) {
 		Random random = new Random(SEED);
 		NNWeightsValidationEvaluationFunction validator = new NNWeightsValidationEvaluationFunction();
-		NNWeightsHillClimbingProblem problem = new NNWeightsHillClimbingProblem(
+		NNWeightsProblem problem = new NNWeightsProblem(
 				random);
 		OptimizationAlgorithm optimizer, bestOptimizer;
 		System.out.print("0, ");
-		bestOptimizer = climbSomeHill(random, problem, validator);
+		bestOptimizer = climbSomeHill(random, problem, validator, NEIGHBORHOOD_SIZE);
 		Timer timer = new Timer();
 		timer.start();
 		for (int i = 1; i < RESTARTS; i++) {
 			System.out.print(i+", ");
-			optimizer = climbSomeHill(random, problem, validator);
+			optimizer = climbSomeHill(random, problem, validator,10);
 			if(optimizer.getOptimizationProblem().value(optimizer.getOptimal())
 				>bestOptimizer.getOptimizationProblem().value(bestOptimizer.getOptimal())) bestOptimizer=optimizer;
 		}
 		timer.stop();
+		System.out.println(timer.display());
 	}
 
 	private static OptimizationAlgorithm climbSomeHill(Random random,
-			NNWeightsHillClimbingProblem problem,
-			NNWeightsValidationEvaluationFunction validator) {
+			NNWeightsProblem problem,
+			NNWeightsValidationEvaluationFunction validator, int neighborhoodSize) {
 		RandomizedHillClimbing optimizer = new RandomizedHillClimbing(problem);
 		double fitness = -Double.MAX_VALUE, newFitness, epsilon = 0.01;
 		int neighborsChecked = 0;
 		Timer timer = new Timer();
 		timer.reset();
 		timer.start();
-		while (neighborsChecked < NEIGHBORHOOD_SIZE) {
+		while (neighborsChecked < neighborhoodSize) {
 			neighborsChecked++;
 			newFitness = optimizer.train();
 			if (newFitness - fitness > epsilon) {
