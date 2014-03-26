@@ -9,17 +9,28 @@ import edu.gatech.cs7641.assignment2.util.Timer;
 
 public class FourPeaksHillClimb {
 
-	private static final int NEIGHBORHOOD_SIZE = 100;
+	private static final int NEIGHBORHOOD_SIZE = 10000;
 	private static final int RESTARTS = 100;
 
 	public static void main(String[] args) {
 		Timer timer = new Timer();
 		timer.start();
 		Random random = new Random();
+		OptimizationAlgorithm optimizer=null, bestOptimizer = null;
+		double bestFitness, newFitness;
 		for (int t = 4; t < 100; t++) {
 			HillClimbingProblem problem = new FourPeaksProblem(random, t);
+			bestFitness = -Double.MAX_VALUE;
 			System.out.print(t + ", ");
-			climbSomeHill(random, problem, NEIGHBORHOOD_SIZE);
+			for (int r = 0; r < RESTARTS; r++) {
+				optimizer = climbSomeHill(random, problem, NEIGHBORHOOD_SIZE);
+				newFitness = problem.value(optimizer.getOptimal());
+				if (newFitness > bestFitness) {
+					bestOptimizer = optimizer;
+					bestFitness = newFitness;
+				}
+			}
+			System.out.printf("%1.0f\n", bestFitness);
 		}
 		timer.stop();
 		System.out.println(timer.display());
@@ -30,9 +41,7 @@ public class FourPeaksHillClimb {
 		RandomizedHillClimbing optimizer = new RandomizedHillClimbing(problem);
 		double fitness = -Double.MAX_VALUE, newFitness, epsilon = 0.01;
 		int neighborsChecked = 0;
-		int i=0;
 		while (neighborsChecked < neighborhoodSize) {
-			i++;
 			neighborsChecked++;
 			newFitness = optimizer.train();
 			if (newFitness - fitness > epsilon) {
@@ -40,8 +49,6 @@ public class FourPeaksHillClimb {
 				fitness = newFitness;
 			}
 		}
-		System.out.printf("%02f, %02f, %d, %s\n", fitness, fitness,
-				i, optimizer.getOptimal().getData().toString());
 		return optimizer;
 	}
 

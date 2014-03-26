@@ -27,8 +27,8 @@ public class FourPeaksProblem implements HillClimbingProblem {
 
 	@Override
 	public Instance random() {
-		double[] bits = new double[t];
-		for (int i=0; i<t; i++) bits[i]=random.nextBoolean()?1:0;
+		double[] bits = new double[t*10];
+		for (int i=0; i<bits.length; i++) bits[i]=random.nextBoolean()?1:0;
 		return new Instance(bits);
 	}
 
