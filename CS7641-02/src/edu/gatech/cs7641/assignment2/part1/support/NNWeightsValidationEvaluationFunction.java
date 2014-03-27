@@ -1,4 +1,4 @@
-package edu.gatech.cs7641.assignment2.part1;
+package edu.gatech.cs7641.assignment2.part1.support;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;

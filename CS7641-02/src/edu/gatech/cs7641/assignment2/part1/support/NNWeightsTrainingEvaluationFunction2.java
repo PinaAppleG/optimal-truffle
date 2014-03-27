@@ -1,4 +1,4 @@
-package edu.gatech.cs7641.assignment2.part1;
+package edu.gatech.cs7641.assignment2.part1.support;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -15,14 +15,14 @@ import util.linalg.Vector;
 import func.nn.feedfwd.FeedForwardNetwork;
 import func.nn.feedfwd.FeedForwardNeuralNetworkFactory;
 
-public class NNWeightsTrainingEvaluationFunction implements EvaluationFunction {
+public class NNWeightsTrainingEvaluationFunction2 implements EvaluationFunction {
 	
 	private static final int SIZELIMIT = 1024;
 	private int[] nodeCounts = { 3, 2, 1 };
 	private FeedForwardNetwork net;
 	private double[][] training;
 
-	public NNWeightsTrainingEvaluationFunction(Random random) {
+	public NNWeightsTrainingEvaluationFunction2(Random random) {
 		FeedForwardNeuralNetworkFactory factory = new FeedForwardNeuralNetworkFactory();
 		net = factory.createClassificationNetwork(nodeCounts);
 		training = new double[SIZELIMIT][];
@@ -56,8 +56,7 @@ public class NNWeightsTrainingEvaluationFunction implements EvaluationFunction {
 		if (d == null)
 			throw new RuntimeException("Value of empty set is undefined");
 		net.setWeights(d.getData());
-		double correct = 0;
-		double error = 0;
+		double fitness = 0;
 		boolean matches;
 		Vector output;
 		DenseVector input;
@@ -74,16 +73,13 @@ public class NNWeightsTrainingEvaluationFunction implements EvaluationFunction {
 			net.run();
 			classification = v[3] == 1 ? 0 : 1;
 			prediction = net.getBinaryOutputValue() ? 1 : 0;
-			matches = prediction == classification;
 			/* magnitude of output in the right direction */
 			output = net.getOutputValues();
-			error += matches ? 0 : (output.get(0)) * (1 - classification)
-					- (output.get(0)) * classification;
-			/* correctly classified training instances */
-			correct += matches ? 1 : 0;
+			fitness += classification * output.get(0) + (1-classification)* - output.get(0);
+			
 		}
 		/* Reward for getting instances right, reward for getting instances less wrong */
-		return (correct - error)/SIZELIMIT*100;
+		return fitness/SIZELIMIT*100;
 	}
 
 }

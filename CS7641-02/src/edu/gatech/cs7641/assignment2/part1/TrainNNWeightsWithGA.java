@@ -5,6 +5,8 @@ import java.util.Random;
 import opt.OptimizationAlgorithm;
 import opt.ga.StandardGeneticAlgorithm;
 import shared.Instance;
+import edu.gatech.cs7641.assignment2.part1.support.NNWeightsProblem;
+import edu.gatech.cs7641.assignment2.part1.support.NNWeightsValidationEvaluationFunction;
 import edu.gatech.cs7641.assignment2.util.Timer;
 
 public class TrainNNWeightsWithGA {

@@ -6,6 +6,10 @@ import opt.HillClimbingProblem;
 import opt.OptimizationAlgorithm;
 import opt.ga.GeneticAlgorithmProblem;
 import shared.Instance;
+import edu.gatech.cs7641.assignment2.part1.support.HillClimbingAlgorithm;
+import edu.gatech.cs7641.assignment2.part1.support.ModifiedGeneticAlgorithm;
+import edu.gatech.cs7641.assignment2.part1.support.NNWeightsProblem;
+import edu.gatech.cs7641.assignment2.part1.support.NNWeightsValidationEvaluationFunction;
 import edu.gatech.cs7641.assignment2.util.Timer;
 
 public class TrainNNWeightsWithHybridGARHC {

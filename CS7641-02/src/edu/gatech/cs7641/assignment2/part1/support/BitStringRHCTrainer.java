@@ -1,4 +1,4 @@
-package edu.gatech.cs7641.assignment2.part1;
+package edu.gatech.cs7641.assignment2.part1.support;
 
 import opt.OptimizationAlgorithm;
 import opt.OptimizationProblem;
