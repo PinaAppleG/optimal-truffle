@@ -1,4 +1,4 @@
-package part2;
+package edu.gatech.cs7641.assignment2.part2;
 
 import java.io.IOException;
 
@@ -8,6 +8,7 @@ import shared.EuclideanDistance;
 import shared.Instance;
 import shared.filt.IndependentComponentAnalysis;
 import shared.reader.DataSetLabelBinarySeperator;
+import edu.gatech.cs7641.assignment2.part2.support.DataLoader;
 import func.KMeansClusterer;
 
 public class RunKMeans {

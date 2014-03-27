@@ -1,6 +1,5 @@
-package edu.gatech.cs7641.assignment2;
+package edu.gatech.cs7641.assignment2.part1.debris;
 
-import edu.gatech.cs7641.assignment2.model.Location;
 
 public class MyNNWeights implements Location {
 

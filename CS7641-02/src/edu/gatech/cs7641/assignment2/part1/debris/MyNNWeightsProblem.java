@@ -1,4 +1,4 @@
-package edu.gatech.cs7641.assignment2;
+package edu.gatech.cs7641.assignment2.part1.debris;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -9,8 +9,6 @@ import java.util.Random;
 
 import util.linalg.DenseVector;
 import util.linalg.Vector;
-import edu.gatech.cs7641.assignment2.model.LocalSpace;
-import edu.gatech.cs7641.assignment2.model.Location;
 import func.nn.Layer;
 import func.nn.Link;
 import func.nn.feedfwd.FeedForwardNetwork;

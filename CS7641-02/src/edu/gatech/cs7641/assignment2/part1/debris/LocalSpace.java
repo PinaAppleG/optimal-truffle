@@ -1,4 +1,4 @@
-package edu.gatech.cs7641.assignment2.model;
+package edu.gatech.cs7641.assignment2.part1.debris;
 
 import java.util.Random;
 

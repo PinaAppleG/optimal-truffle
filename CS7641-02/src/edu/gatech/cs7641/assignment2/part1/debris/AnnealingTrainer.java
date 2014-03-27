@@ -1,10 +1,8 @@
-package edu.gatech.cs7641.assignment2.part1.support;
+package edu.gatech.cs7641.assignment2.part1.debris;
 
 import java.util.Random;
 
-import opt.OptimizationAlgorithm;
 import shared.Instance;
-import shared.Trainer;
 import util.linalg.DenseVector;
 
 public class AnnealingTrainer extends BitStringRHCTrainer {

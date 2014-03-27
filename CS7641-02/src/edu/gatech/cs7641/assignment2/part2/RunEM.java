@@ -1,11 +1,10 @@
-package part2;
+package edu.gatech.cs7641.assignment2.part2;
 
 import java.io.IOException;
 
 import dist.MixtureDistribution;
-
+import edu.gatech.cs7641.assignment2.part2.support.DataLoader;
 import func.EMClusterer;
-
 import shared.DataSet;
 import shared.Instance;
 import shared.reader.DataSetLabelBinarySeperator;

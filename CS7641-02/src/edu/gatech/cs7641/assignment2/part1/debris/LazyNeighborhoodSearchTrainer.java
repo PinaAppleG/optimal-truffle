@@ -1,4 +1,4 @@
-package edu.gatech.cs7641.assignment2.part1.support;
+package edu.gatech.cs7641.assignment2.part1.debris;
 
 import opt.HillClimbingProblem;
 import opt.RandomizedHillClimbing;

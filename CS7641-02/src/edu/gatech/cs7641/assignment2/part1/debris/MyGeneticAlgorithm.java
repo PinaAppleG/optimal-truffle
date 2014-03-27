@@ -1,9 +1,6 @@
-package edu.gatech.cs7641.assignment2.algorithms;
+package edu.gatech.cs7641.assignment2.part1.debris;
 
 import java.util.Random;
-
-import edu.gatech.cs7641.assignment2.model.LocalSpace;
-import edu.gatech.cs7641.assignment2.model.Location;
 
 public class MyGeneticAlgorithm {
 	private static final int BREEDING_INTERVAL = 10;

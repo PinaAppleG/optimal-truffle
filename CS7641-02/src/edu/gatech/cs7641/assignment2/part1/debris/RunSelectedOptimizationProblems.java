@@ -1,6 +1,5 @@
-package edu.gatech.cs7641.assignment2.part1;
+package edu.gatech.cs7641.assignment2.part1.debris;
 
-import edu.gatech.cs7641.assignment2.part1.support.BitStringOptimizationProcedure;
 import opt.example.ContinuousPeaksEvaluationFunction;
 import opt.example.CountOnesEvaluationFunction;
 import opt.example.FlipFlopEvaluationFunction;

@@ -1,4 +1,4 @@
-package part2;
+package edu.gatech.cs7641.assignment2.part2.support;
 
 import java.io.IOException;
 
