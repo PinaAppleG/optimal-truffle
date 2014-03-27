@@ -2,9 +2,9 @@ package part2;
 
 import java.io.IOException;
 
-import dist.Distribution;
-
 import shared.DataSet;
+import shared.DistanceMeasure;
+import shared.EuclideanDistance;
 import shared.Instance;
 import shared.filt.IndependentComponentAnalysis;
 import shared.reader.DataSetLabelBinarySeperator;
@@ -27,11 +27,12 @@ public class RunKMeans {
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
+		
 		System.out.println("\nRun on Binarized Dataset\n");
 		compareKMeansOverK(set, DEFAULT_MAX_K);
-		
-		IndependentComponentAnalysis ica = 
-				new IndependentComponentAnalysis(set,-1);
+
+		IndependentComponentAnalysis ica = new IndependentComponentAnalysis(
+				set, -1);
 		ica.filter(set);
 		System.out.println("\nRun on Binarized Dataset projected over ICA\n");
 		compareKMeansOverK(set, DEFAULT_MAX_K);
@@ -44,6 +45,8 @@ public class RunKMeans {
 		int off = maxValueOfK + 1 - dim;
 		int bestK = 0;
 		Instance[][] centers = new Instance[dim][];
+		int clusterCenter;
+		DistanceMeasure dist = new EuclideanDistance();
 		double[] logp = new double[dim];
 		double d;
 		for (int k = 0; k < dim; k++) {
@@ -52,7 +55,8 @@ public class RunKMeans {
 			km.estimate(set);
 			centers[k] = km.getClusterCenters();
 			for (int i = 0; i < set.size(); i++) {
-				d = km.logp(set.get(i));
+				clusterCenter = (int) km.value(set.get(i)).getData().get(0);
+				d = dist.value(set.get(i), centers[k][clusterCenter]);
 				if (d == d)
 					logp[k] += d;
 			}
