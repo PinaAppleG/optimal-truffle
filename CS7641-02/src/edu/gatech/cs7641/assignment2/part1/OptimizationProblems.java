@@ -1,6 +1,7 @@
 package edu.gatech.cs7641.assignment2.part1;
 
 import java.util.Arrays;
+import java.util.Random;
 
 import opt.DiscreteChangeOneNeighbor;
 import opt.EvaluationFunction;
@@ -12,6 +13,7 @@ import opt.example.ContinuousPeaksEvaluationFunction;
 import opt.example.CountOnesEvaluationFunction;
 import opt.example.FlipFlopEvaluationFunction;
 import opt.example.FourPeaksEvaluationFunction;
+import opt.example.KnapsackEvaluationFunction;
 import opt.ga.DiscreteChangeOneMutation;
 import opt.ga.GenericGeneticAlgorithmProblem;
 import opt.ga.GeneticAlgorithmProblem;
@@ -27,16 +29,34 @@ import edu.gatech.cs7641.assignment2.part1.support.OptimizerConfig;
 import edu.gatech.cs7641.assignment2.util.Timer;
 
 public class OptimizationProblems {
-
+	
+    private static final int NUM_ITEMS = 40;
+    /** The number of copies each */
+    private static final int COPIES_EACH = 4;
+    /** The maximum weight for a single element */
+    private static final double MAX_WEIGHT = 50;
+    /** The maximum volume for a single element */
+    private static final double MAX_VOLUME = 50;
+    /** The volume of the knapsack */
+    private static final double KNAPSACK_VOLUME = 
+         MAX_VOLUME * NUM_ITEMS * COPIES_EACH * .4;
+    
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		int size = 80;
+		int size = 200;
 		int iterations = 10;
+
+		/* Count Ones */
+		OptimizerConfig config = setupProblem(size,
+				new CountOnesEvaluationFunction());
+		optimize(config, iterations);
+		
+		size=80;
 		
 		/* Flip Flop */
-		OptimizerConfig config = setupProblem(size,
+		config = setupProblem(size,
 				new FlipFlopEvaluationFunction());
 		optimize(config, iterations);
 		
@@ -51,10 +71,25 @@ public class OptimizationProblems {
 				new ContinuousPeaksEvaluationFunction(size/10));
 		optimize(config, iterations);
 
-		/* Count Ones */
-		config = setupProblem(size,
-				new CountOnesEvaluationFunction());
+		/* Knapsack */
+		Random random = new Random(1L);
+        int[] copies = new int[NUM_ITEMS];
+        Arrays.fill(copies, COPIES_EACH);
+        double[] weights = new double[NUM_ITEMS];
+        double[] volumes = new double[NUM_ITEMS];
+        for (int i = 0; i < NUM_ITEMS; i++) {
+            weights[i] = random.nextDouble() * MAX_WEIGHT;
+            volumes[i] = random.nextDouble() * MAX_VOLUME;
+        }
+         int[] ranges = new int[NUM_ITEMS];
+        Arrays.fill(ranges, COPIES_EACH + 1);
+		config = new OptimizerConfig(new KnapsackEvaluationFunction(weights, volumes, KNAPSACK_VOLUME, copies),
+				new DiscreteUniformDistribution(ranges),
+				new DiscreteChangeOneNeighbor(ranges),
+				new DiscreteChangeOneMutation(ranges), new SingleCrossOver(),
+				new DiscreteDependencyTree(0.1, ranges));
 		optimize(config, iterations);
+		
 	}
 
 	private static OptimizerConfig setupProblem(int size,
