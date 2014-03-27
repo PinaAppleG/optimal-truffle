@@ -5,7 +5,7 @@ import java.util.Random;
 import edu.gatech.cs7641.assignment2.model.LocalSpace;
 import edu.gatech.cs7641.assignment2.model.Location;
 
-public class GeneticAlgorithm {
+public class MyGeneticAlgorithm {
 	private static final int BREEDING_INTERVAL = 10;
 
 	public Location search(final LocalSpace localSpace,

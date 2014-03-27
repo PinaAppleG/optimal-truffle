@@ -5,7 +5,7 @@ import java.util.Random;
 import edu.gatech.cs7641.assignment2.model.LocalSpace;
 import edu.gatech.cs7641.assignment2.model.Location;
 
-public class SimulatedAnnealing {
+public class MySimulatedAnnealing {
 
 	/*
 	 * A cooling rate of 0.9 would give about 6,730 iterations. A cooling rate

@@ -1,8 +1,8 @@
 package edu.gatech.cs7641.assignment2;
 
-import edu.gatech.cs7641.assignment2.algorithms.GeneticAlgorithm;
-import edu.gatech.cs7641.assignment2.algorithms.RandomizedHillClimbing;
-import edu.gatech.cs7641.assignment2.algorithms.SimulatedAnnealing;
+import edu.gatech.cs7641.assignment2.algorithms.MyGeneticAlgorithm;
+import edu.gatech.cs7641.assignment2.algorithms.MyRandomizedHillClimbing;
+import edu.gatech.cs7641.assignment2.algorithms.MySimulatedAnnealing;
 import edu.gatech.cs7641.assignment2.model.Location;
 
 
@@ -12,9 +12,9 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		NNWeightsProblem nnWeights = new NNWeightsProblem();
+		MyNNWeightsProblem nnWeights = new MyNNWeightsProblem();
 		System.out.println("Optimize NNWeights problem with RHC");
-		RandomizedHillClimbing rhc = new RandomizedHillClimbing();
+		MyRandomizedHillClimbing rhc = new MyRandomizedHillClimbing();
 		Location rhcOptimum = rhc.randomSearch(nnWeights, 0.1d, 10);
 		System.out.println(rhcOptimum);
 		System.out.println("Peak Fitness: "+nnWeights.valueOf(rhcOptimum));
@@ -25,7 +25,7 @@ public class Main {
 		System.out.println();
 		
 		System.out.println("Optimize NNWeights problem with Simulated Annealing");
-		SimulatedAnnealing sa = new SimulatedAnnealing();
+		MySimulatedAnnealing sa = new MySimulatedAnnealing();
 		Location saOptimum = sa.search(nnWeights, 0.1d, 10);
 		System.out.println(saOptimum);
 		System.out.println("Peak Fitness: "+nnWeights.valueOf(saOptimum));
@@ -36,7 +36,7 @@ public class Main {
 		System.out.println();
 		
 		System.out.println("Optimize NNWeights problem with Genetic Algorithm");
-		GeneticAlgorithm ga = new GeneticAlgorithm();
+		MyGeneticAlgorithm ga = new MyGeneticAlgorithm();
 		Location gaOptimum = ga.search(nnWeights,100, 10, 0.001);
 		System.out.println(gaOptimum);
 		System.out.println("Peak Fitness: "+nnWeights.valueOf(gaOptimum));
@@ -45,15 +45,15 @@ public class Main {
 		
 		
 		System.out.println("Randomized Hill Climbing Network");
-		nnWeights.printNetwork((NNWeightsLocation)rhcOptimum);		
+		nnWeights.printNetwork((MyNNWeights)rhcOptimum);		
 		System.out.println();
 		System.out.println();	
 		System.out.println("Simulated Annealing Network");
-		nnWeights.printNetwork((NNWeightsLocation)saOptimum);		
+		nnWeights.printNetwork((MyNNWeights)saOptimum);		
 		System.out.println();
 		System.out.println();	
 		System.out.println("My Genetic Algorithm Network");
-		nnWeights.printNetwork((NNWeightsLocation)gaOptimum);		
+		nnWeights.printNetwork((MyNNWeights)gaOptimum);		
 		System.out.println();
 		System.out.println();
 	}
