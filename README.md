@@ -15,11 +15,11 @@ All runnable classes are in edu.gatech.cs7641.assignment2.part1 and edu.gatech.c
 
 1. Open Eclipse, and if you have not already done so, import the ABAGAIL and CS7641-02 projects.
 2. In the part1 package, runnable experiments include:
-    TrainNNWeightsWithRHC
-    TrainNNWeightsWithSA
-    TrainNNWeightsWithGA
-    TrainNNWeightsWithHybridGARHC
-    OptimizationProblems
+  * TrainNNWeightsWithRHC
+  * TrainNNWeightsWithSA
+  * TrainNNWeightsWithGA
+  * TrainNNWeightsWithHybridGARHC
+  * OptimizationProblems
 3. In the part2 package, runnable experiments include:
 
 
