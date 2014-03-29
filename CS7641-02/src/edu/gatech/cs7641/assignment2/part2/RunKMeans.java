@@ -23,8 +23,8 @@ public class RunKMeans {
 	public static void main(String[] args) {
 		DataSet set;
 		try {
-			set = DataLoader.loadData("");
-			DataSetLabelBinarySeperator.seperateLabels(set);
+			set = DataLoader.loadData("C:/Users/nm5144/git/optimal-truffle/datasets/votes/house-votes-84.arff");
+			//DataSetLabelBinarySeperator.seperateLabels(set);
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}

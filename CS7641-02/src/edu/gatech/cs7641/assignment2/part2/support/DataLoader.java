@@ -18,10 +18,8 @@ public class DataLoader {
 		}
 		try {
 			return reader.read();
-		} catch (Exception e) {
-			if(e.getClass().isInstance(IOException.class)) throw (IOException) e;
-			else if(e.getClass().isInstance(RuntimeException.class)) throw (RuntimeException) e;
-			else throw new RuntimeException(e);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
 		}
 	}
 }
