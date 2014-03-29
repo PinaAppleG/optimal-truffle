@@ -9,6 +9,7 @@ import shared.Instance;
 import shared.filt.IndependentComponentAnalysis;
 import shared.reader.DataSetLabelBinarySeperator;
 import edu.gatech.cs7641.assignment2.part2.support.DataLoader;
+import edu.gatech.cs7641.assignment2.part2.support.URLDataLoader;
 import func.KMeansClusterer;
 
 public class RunKMeans {
@@ -22,8 +23,7 @@ public class RunKMeans {
 	public static void main(String[] args) {
 		DataSet set;
 		try {
-			set = DataLoader
-					.loadData("/Users/sephirothxxsama/git/abagail/bin/shared/test/abalone.arff");
+			set = DataLoader.loadData("");
 			DataSetLabelBinarySeperator.seperateLabels(set);
 		} catch (IOException e) {
 			throw new RuntimeException(e);
