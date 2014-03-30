@@ -1,4 +1,4 @@
-package edu.gatech.cs7641.assignment2.part2;
+package edu.gatech.cs7641.assignment2.part2.debris;
 
 import java.io.IOException;
 
