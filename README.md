@@ -9,7 +9,7 @@ All source code is located in CS7641-02/src.  CS7641-02 includes an eclipse proj
 
 #### Project organization
 
-All runnable classes are in edu.gatech.cs7641.assignment2.part1 and edu.gatech.cs7641.assignment2.part2.  Classes supporting the final product are in subpackages titled support, and classes developed but not used are in subpackges titled debris.
+All runnable classes in the final solution are in edu.gatech.cs7641.assignment2.part1 and edu.gatech.cs7641.assignment2.part2.  Classes supporting the final product are in subpackages titled support, and classes developed but not used are in subpackges titled debris.
 
 #### Running the main classes.
 
